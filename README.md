@@ -32,3 +32,12 @@ Importe o repositório na Vercel usando Framework Preset **Other**, mantendo o R
 A V8.6 local, com `server.mjs` e SQLite, é uma implementação separada, que não funciona como banco persistente no ambiente serverless da Vercel. Esta versão é uma adaptação para hospedagem, não uma cópia bit a bit da V8.6.
 
 Desenvolvido por BAWERK SOLUTIONS.
+
+
+## Modo protótipo sem banco (novo)
+
+- Após escolher o projeto em `/projetos`, o visitante vai para `/doar` e simula PIX com QR ilustrativo ou resultado de cartão.
+- Não há cobrança real, PIX Copia e Cola bancário, entrada de dados completos de cartão, nem assinatura recorrente automática.
+- O checkout e o formulário público salvam registros exclusivamente no `localStorage` deste navegador.
+- Para visualizar as doações e os leads simulados, entre em `/admin?demo=1` e clique no painel de demonstração. Dados ficam isolados por navegador e dispositivo, sem autenticação forte: **não use dados reais**.
+- O painel conectado ao banco continua disponível separadamente com credenciais de ambiente; é necessário para testes multiusuário.
