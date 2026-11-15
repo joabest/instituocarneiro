@@ -58,3 +58,5 @@
 }
 @media(max-width:380px){.admin-page .admin-mobile-head{padding:9px 12px}.admin-page .adminmain{padding:12px!important}.admin-page .admintop h1{font-size:22px!important}.admin-page #refresh{font-size:11px;padding:8px}}
 @media(prefers-reduced-motion:reduce){.admin-page .sidebar{transition:none!important}}
+
+.admin-page .adminshell.hide{display:none!important}
