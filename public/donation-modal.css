@@ -1,0 +1,56 @@
+/* Modal de doação do protótipo — imagem e composição originais do Instituto Carneiro */
+.ic-donation-overlay[hidden],.ic-donation-stage[hidden],.ic-qr-wrap[hidden],#icCardBox[hidden]{display:none!important}
+.ic-donation-overlay{position:fixed;inset:0;z-index:200;isolation:isolate;color:#202721;font-family:'DM Sans',sans-serif}
+.ic-donation-shade{position:absolute;inset:0;background:#050b08bb;backdrop-filter:blur(5px);animation:icFade .3s ease both;cursor:pointer}
+.ic-donation-showcase{position:absolute;top:50%;left:calc((100% - min(455px,39vw))/2);width:min(370px,29vw);height:min(610px,74vh);transform:translate(-50%,-50%);background:#071a13;box-shadow:0 20px 60px #0005;overflow:hidden;animation:icArt .45s both}
+.ic-donation-showcase-image{position:absolute;inset:0;background:linear-gradient(180deg,#0f251f25,#041d1bda),url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=750&q=80') center/cover;filter:saturate(.3)}
+.ic-donation-art-copy{position:absolute;inset:20px;display:flex;flex-direction:column;justify-content:space-between;color:white}
+.ic-donation-art-copy span,.ic-donation-art-copy small{font-size:11px;font-weight:800;letter-spacing:.16em}
+.ic-donation-art-copy strong{font:800 clamp(35px,4vw,63px)/.92 Manrope,sans-serif;letter-spacing:-.09em}
+.ic-donation-art-copy em{color:#d7ff78;font-style:normal}
+.ic-donation-panel{position:absolute;right:0;top:0;height:100%;width:min(455px,100%);background:#fafbf8;box-shadow:-18px 0 65px #0004;display:flex;flex-direction:column;animation:icSlide .4s cubic-bezier(.17,.8,.2,1) both}
+.ic-donation-panel-top{display:flex;align-items:center;justify-content:space-between;padding:28px 35px 18px;gap:20px}
+.ic-donation-brand{display:flex;align-items:center;gap:5px;color:#123e2e;font-size:26px;font-weight:900;letter-spacing:-.08em}
+.ic-donation-brand span{color:#8fda47;font-size:17px;align-self:flex-start}
+.ic-donation-brand small{font-size:8px;line-height:1.1;letter-spacing:.12em;max-width:72px;margin-left:9px}
+.ic-donation-close,.ic-donation-back{border:0;background:transparent;color:#202721;font-size:11px;font-weight:800;letter-spacing:.09em;white-space:nowrap}
+.ic-donation-close{display:flex;align-items:center;gap:8px}.ic-donation-close span{font-size:18px;font-weight:400}
+.ic-donation-scroll{flex:1;overflow:auto;overscroll-behavior:contain;padding:20px 35px 35px}
+.ic-donation-label{font-size:10px;letter-spacing:.13em;font-weight:900;margin:0 0 14px;color:#52745f}
+.ic-donation-stage h2{font:800 clamp(33px,3vw,48px)/1 Manrope,sans-serif;letter-spacing:-.075em;margin:0 0 18px}
+.ic-donation-stage h2 em{font-style:normal;color:#65945f}
+.ic-donation-stage>p{font-size:13px;line-height:1.55;color:#5e685f;margin-bottom:25px}
+.ic-donation-projects{display:grid;gap:8px;margin-bottom:17px}
+.ic-donation-projects button{width:100%;display:flex;align-items:center;gap:11px;min-height:65px;text-align:left;border:1px solid #d3ddd4;background:white;padding:8px;transition:background .2s,border .2s;min-width:0}
+.ic-donation-projects button.active{border:2px solid #2d7c55;background:#eef8e9}
+.ic-donation-projects button:hover{background:#eff7eb}
+.ic-donation-projects button img{width:55px;height:49px;object-fit:cover;flex:none;filter:saturate(.65)}
+.ic-donation-projects button span{font-size:12px;font-weight:800;line-height:1.2;flex:1}
+.ic-donation-projects button small{display:block;font-size:9px;font-weight:500;color:#6b756d;margin-top:3px}
+.ic-donation-projects button b{font-size:19px;font-weight:400;color:#336b4b}
+.ic-donation-project-detail{background:#eef2ec;padding:15px;margin:15px 0 20px;border-left:3px solid #72a65e}
+.ic-donation-project-detail strong{font-size:12px}.ic-donation-project-detail p{font-size:11px;color:#4c6655;margin:6px 0 0;line-height:1.5}
+.ic-donation-primary{border:0;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;background:#8d29ec;color:white;padding:16px 19px;border-radius:30px;font-size:11px;font-weight:900;letter-spacing:.09em;transition:background .2s,transform .2s}
+.ic-donation-primary span{font-size:18px}.ic-donation-primary:hover{background:#6e18bb;transform:translateY(-2px)}.ic-donation-primary:disabled{opacity:.45}
+.ic-donation-back{padding:0 0 23px;color:#4b6355}
+.ic-donation-values{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:20px}
+.ic-donation-values button{border:1px solid #c4d4c7;background:white;padding:13px;font-size:18px;font-weight:900}
+.ic-donation-values button.active{color:#1e6141;background:#e7f5de;border-color:#3a9363}
+.ic-donation-stage input:not([type=checkbox]):not([type=radio]),.ic-donation-stage textarea{border:1px solid #bfcfc1;border-radius:0;padding:12px;margin:0 0 16px;width:100%;font-size:14px}
+.ic-donation-methods{display:flex;gap:8px;margin-bottom:18px}
+.ic-donation-methods label{flex:1;display:flex;align-items:center;gap:6px;padding:10px 7px;border:1px solid #c7d6c9;background:white;font-size:9px;font-weight:800;letter-spacing:.01em;cursor:pointer}
+.ic-donation-methods input{width:auto;accent-color:#507e55}
+.ic-donation-consent{display:flex;align-items:flex-start;gap:10px;font-size:11px;font-weight:500;line-height:1.4;margin:0 0 14px}
+.ic-donation-consent input{margin:2px 0 0;accent-color:#437d51;flex:none}
+.ic-donation-error{color:#aa392d!important;font-size:12px!important;margin:5px 0 12px!important;min-height:18px}
+.ic-donation-disclaimer{font-size:9px;text-align:center;letter-spacing:.04em;margin-top:16px;color:#7d8e7c}
+.ic-donation-bottom{border-top:1px solid #dce6dc;display:flex;justify-content:space-between;padding:18px 35px;font-size:9px;color:#607367;letter-spacing:.06em}
+.ic-qr-wrap{text-align:center;background:white;padding:20px 12px;margin-bottom:17px;border:1px solid #dae7db}
+.ic-qr-image{min-height:220px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}.ic-qr-image img{max-width:100%}
+.ic-donation-secondary{border:1px solid #6b9f78;background:white;color:#23553c;font-size:11px;font-weight:800;padding:12px 15px;margin:5px 0;width:100%}
+.ic-donation-result-status{font-size:12px;color:#306d43;font-weight:700;margin:12px 0}
+.ic-donation-view-admin{display:block;color:#256d40;text-decoration:underline;font-size:11px;font-weight:800;margin:30px 0}
+body.ic-modal-open{overflow:hidden!important}
+@keyframes icFade{from{opacity:0}to{opacity:1}}@keyframes icSlide{from{opacity:.7;transform:translateX(45px)}to{opacity:1;transform:translateX(0)}}@keyframes icArt{from{opacity:0;transform:translate(-50%,-45%) scale(.95)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@media(max-width:900px){.ic-donation-showcase{left:28%;width:35vw}.ic-donation-panel{width:min(455px,57vw)}}@media(max-width:660px){.ic-donation-showcase{display:none}.ic-donation-panel{width:100%;height:100%;max-height:100dvh}.ic-donation-scroll{padding:18px 21px 30px}.ic-donation-panel-top{padding:16px 21px}.ic-donation-bottom{padding:14px 21px}.ic-donation-stage h2{font-size:38px}.ic-donation-projects{gap:6px}.ic-donation-projects button{min-height:59px}}
+@media(prefers-reduced-motion:reduce){.ic-donation-shade,.ic-donation-panel,.ic-donation-showcase{animation:none!important}.ic-donation-primary{transition:none}}
