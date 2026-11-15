@@ -30,8 +30,8 @@
 .ic-donation-projects button b{font-size:19px;font-weight:400;color:#336b4b}
 .ic-donation-project-detail{background:#eef2ec;padding:15px;margin:15px 0 20px;border-left:3px solid #72a65e}
 .ic-donation-project-detail strong{font-size:12px}.ic-donation-project-detail p{font-size:11px;color:#4c6655;margin:6px 0 0;line-height:1.5}
-.ic-donation-primary{border:0;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;background:#8d29ec;color:white;padding:16px 19px;border-radius:30px;font-size:11px;font-weight:900;letter-spacing:.09em;transition:background .2s,transform .2s}
-.ic-donation-primary span{font-size:18px}.ic-donation-primary:hover{background:#6e18bb;transform:translateY(-2px)}.ic-donation-primary:disabled{opacity:.45}
+.ic-donation-primary{border:0;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;background:#16856b;color:white;padding:16px 19px;border-radius:30px;font-size:11px;font-weight:900;letter-spacing:.09em;transition:background .2s,transform .2s}
+.ic-donation-primary span{font-size:18px}.ic-donation-primary:hover{background:#10372c;transform:translateY(-2px)}.ic-donation-primary:disabled{opacity:.45}
 .ic-donation-back{padding:0 0 23px;color:#4b6355}
 .ic-donation-values{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:20px}
 .ic-donation-values button{border:1px solid #c4d4c7;background:white;padding:13px;font-size:18px;font-weight:900}
