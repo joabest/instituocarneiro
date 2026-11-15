@@ -18,3 +18,43 @@
 @media(max-width:1000px){.overview-shortcuts{grid-template-columns:1fr}.preview-viewport iframe{height:640px}}
 @media(max-width:560px){.preview-toolbar{align-items:flex-start}.preview-viewport{padding:10px 7px 0}.preview-viewport iframe{height:520px}.preview-viewport iframe.mobile-preview{width:360px}.overview-shortcuts button{padding:15px}}
 
+
+/* Mobile first admin drawer: menu recolhido; dashboard visível sem rolagem horizontal */
+.admin-mobile-head,.admin-drawer-backdrop{display:none}
+.admin-page .adminshell{min-width:0}
+.admin-page .adminmain{min-width:0}
+.admin-page .sidebar nav button{cursor:pointer}
+@media(max-width:800px){
+ .admin-page .adminshell{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto minmax(0,1fr);min-width:0}
+ .admin-page .admin-mobile-head{grid-row:1;display:flex;position:sticky;top:0;z-index:105;height:69px;background:#fff;border-bottom:1px solid #dbe7de;padding:10px 16px;align-items:center;justify-content:space-between;gap:10px}
+ .admin-page .admin-mobile-head .brand{font-size:13px;line-height:1.05;gap:9px}
+ .admin-page .admin-mobile-head .brandmark{width:40px;height:40px;font-size:19px;flex-shrink:0}
+ .admin-page .admin-mobile-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:41px;padding:8px 14px;background:#14583d;color:#fff;border:0;border-radius:9px;font-size:20px;font-weight:700;cursor:pointer}
+ .admin-page .admin-mobile-toggle span{font-size:11px;letter-spacing:.06em}
+ .admin-page .sidebar{display:flex!important;flex-direction:column!important;position:fixed!important;inset:0 auto 0 0!important;z-index:121!important;width:min(310px,86vw)!important;max-width:86vw!important;height:100dvh!important;min-height:0!important;background:#fff!important;padding:22px 16px!important;overflow-y:auto!important;overflow-x:hidden!important;box-shadow:10px 0 45px #00170f22;transform:translateX(-110%);visibility:hidden;transition:transform .28s ease,visibility .28s;overscroll-behavior:contain}
+ .admin-page .sidebar.mobile-open{transform:translateX(0);visibility:visible}
+ .admin-page .sidebar>.brand{display:flex}
+ .admin-page .sidebar .sidebar-sub{display:block;margin:22px 8px 12px}
+ .admin-page .sidebar nav{display:grid!important;overflow:visible!important;grid-template-columns:minmax(0,1fr)!important;gap:5px!important;padding:0!important}
+ .admin-page .sidebar nav button{display:flex!important;align-items:center;width:100%!important;white-space:normal!important;padding:13px 14px!important;font-size:14px!important;min-height:46px}
+ .admin-page .sidebar .navbottom{display:flex!important;flex-direction:column!important;gap:6px!important;margin-top:auto;padding-top:18px}
+ .admin-page .sidebar .navbottom a,.admin-page .sidebar .navbottom button{display:block!important;width:100%!important;padding:12px 14px!important}
+ .admin-page .admin-drawer-backdrop:not([hidden]){display:block;position:fixed;inset:0;background:#061c15a6;border:0;width:100%;height:100dvh;z-index:120;cursor:pointer}
+ .admin-page .adminmain{grid-row:2;grid-column:1;padding:16px!important;min-width:0;width:100%}
+ .admin-page .admintop{flex-direction:row!important;justify-content:space-between;align-items:flex-start!important;gap:12px;margin-bottom:16px}
+ .admin-page .admintop h1{font-size:25px!important}
+ .admin-page .admintop .kicker{font-size:9px}
+ .admin-page .admintop .muted{font-size:12px;line-height:1.4}
+ .admin-page #menuToggle{display:none!important}
+ .admin-page .demopill{display:none}
+ .admin-page .admin-tools{gap:4px;align-items:flex-start}
+ .admin-page #refresh{font-size:12px;padding:9px}
+ .admin-page .demo-alert{font-size:12px;line-height:1.5;padding:11px 13px;margin:0 0 16px}
+ .admin-page .metricgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px}
+ .admin-page .metric{min-width:0;padding:14px}
+ .admin-page .metric strong{font-size:22px}
+ .admin-page .preview-shell,.admin-page .admindata{max-width:100%}
+ .admin-page .responsive-table{max-width:calc(100vw - 64px)}
+}
+@media(max-width:380px){.admin-page .admin-mobile-head{padding:9px 12px}.admin-page .adminmain{padding:12px!important}.admin-page .admintop h1{font-size:22px!important}.admin-page #refresh{font-size:11px;padding:8px}}
+@media(prefers-reduced-motion:reduce){.admin-page .sidebar{transition:none!important}}

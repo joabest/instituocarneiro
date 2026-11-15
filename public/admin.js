@@ -10,7 +10,7 @@ const statusLabel={sandbox_pending:'Pendente',sandbox_approved:'Aprovado (teste)
 const field=(label,key,value='',kind='text',wide=false)=>'<div class="'+(wide?'wide':'')+'"><label for="f_'+key+'">'+safe(label)+'</label>'+(kind==='textarea'?'<textarea id="f_'+key+'" name="'+key+'">'+safe(value)+'</textarea>':kind==='checkbox'?'<input id="f_'+key+'" type="checkbox" name="'+key+'" '+(value?'checked':'')+'>':kind==='select'?'<select id="f_'+key+'" name="'+key+'">'+value+'</select>':'<input id="f_'+key+'" name="'+key+'" type="'+kind+'" value="'+safe(value)+'" '+(['name','email','title'].includes(key)?'required':'')+'>')+'</div>';
 function options(arr,value){return arr.map(([v,l])=>'<option value="'+safe(v)+'" '+(v===value?'selected':'')+'>'+safe(l)+'</option>').join('')}
 function table(headers,rows){if(!rows.length)return '<div class="empty-state">Nenhum registro encontrado. Crie um teste para começar.</div>';return '<table><thead><tr>'+headers.map(h=>'<th>'+safe(h)+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table>'}
-function goto(target){page=target in titles?target:'overview';document.querySelectorAll('[data-section]').forEach(el=>el.classList.toggle('hide',el.dataset.section!==page));document.querySelectorAll('[data-page]').forEach(el=>el.classList.toggle('selected',el.dataset.page===page));$('pageTitle').textContent=titles[page][0];$('pageDesc').textContent=titles[page][1];location.hash=page;refresh();scrollTo({top:0,behavior:'instant'})}
+function goto(target){closeMobileNav();page=target in titles?target:'overview';document.querySelectorAll('[data-section]').forEach(el=>el.classList.toggle('hide',el.dataset.section!==page));document.querySelectorAll('[data-page]').forEach(el=>el.classList.toggle('selected',el.dataset.page===page));$('pageTitle').textContent=titles[page][0];$('pageDesc').textContent=titles[page][1];location.hash=page;refresh();scrollTo({top:0,behavior:'instant'})}
 function bars(map){const a=Object.entries(map).sort((x,y)=>y[1]-x[1]);if(!a.length)return '<p class="muted">Sem dados no momento.</p>';const max=Math.max(1,...a.map(x=>x[1]));return a.map(([k,v])=>'<div class="bar-label"><strong>'+safe(k)+'</strong><span>'+brl(v)+'</span></div><div class="smallbar"><div style="width:'+Math.round(v/max*100)+'%"></div></div>').join('')}
 function counts(map){const a=Object.entries(map);return a.length?a.map(([k,v])=>'<div class="bar-label"><strong>'+safe(k)+'</strong><span>'+v+'</span></div><div class="smallbar"><div style="width:'+Math.round(v/Math.max(1,...Object.values(map))*100)+'%"></div></div>').join(''):'<p class="muted">Sem registros.</p>'}
 function refresh(){const d=S.get();if(page==='site')updatePreview();if(page==='overview')overview(d);if(page==='donations')donations(d);if(page==='leads')leads(d);if(page==='projects')projects(d);if(page==='reports')reports(d);if(page==='settings')settings(d)}
@@ -34,13 +34,19 @@ function csv(file,arr,keys){const text='\ufeff'+[keys.join(';'),...arr.map(row=>
 function delegate(e){const el=e.target.closest('button');if(!el)return;const p=el.dataset;for(const [type,suffix] of [['donations','donation'],['leads','lead'],['projects','project']]){if(p['edit'+suffix[0].toUpperCase()+suffix.slice(1)])return edit(type,p['edit'+suffix[0].toUpperCase()+suffix.slice(1)]);if(p['delete'+suffix[0].toUpperCase()+suffix.slice(1)])return remove(type,p['delete'+suffix[0].toUpperCase()+suffix.slice(1)])}
 if(p.toggleProject){const d=S.get(),row=d.projects.find(x=>x.slug===p.toggleProject);if(row){row.active=row.active===false;S.save(d);refresh()}}if(p.goto)goto(p.goto)}
 function login(){sessionStorage.setItem('ic_admin_demo','1');$('loginScreen').classList.add('hide');$('dashboard').classList.remove('hide');goto(location.hash.replace('#','')||'overview')}
-function logout(){sessionStorage.removeItem('ic_admin_demo');$('dashboard').classList.add('hide');$('loginScreen').classList.remove('hide');$('password').value='';history.replaceState(null,'',location.pathname)}
+function logout(){closeMobileNav();sessionStorage.removeItem('ic_admin_demo');$('dashboard').classList.add('hide');$('loginScreen').classList.remove('hide');$('password').value='';history.replaceState(null,'',location.pathname)}
 let previewUrl='/';
 function updatePreview(){const frame=$('sitePreview');if(!frame)return;const link=$('previewNewTab');if(link)link.href=previewUrl;}
 function navigatePreview(url){previewUrl=url;$('sitePreview').src=url;updatePreview()}
+function setMobileNav(open){const side=$('adminSidebar'),back=$('adminDrawerBackdrop'),btn=$('mobileMenuButton');if(!side||!back||!btn)return;side.classList.toggle('mobile-open',open);back.hidden=!open;btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Fechar menu administrativo':'Abrir menu administrativo');document.body.classList.toggle('admin-menu-open',open)}
+function closeMobileNav(){setMobileNav(false)}
 function init(){
 $('loginForm').addEventListener('submit',e=>{e.preventDefault();if($('password').value.trim().toLowerCase()==='admin')login();else $('loginError').textContent='Para o protótipo, utilize a palavra admin.'});
 $('adminNav').onclick=e=>{const btn=e.target.closest('[data-page]');if(btn)goto(btn.dataset.page)};
+$('mobileMenuButton').onclick=()=>setMobileNav(!$('adminSidebar').classList.contains('mobile-open'));
+$('adminDrawerBackdrop').onclick=closeMobileNav;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileNav()});
+window.addEventListener('resize',()=>{if(innerWidth>800)closeMobileNav()});
 $('logout').onclick=logout;$('refresh').onclick=refresh;
 $('previewDesktop').onclick=()=>{$('sitePreview').classList.remove('mobile-preview');$('previewDesktop').classList.add('is-active');$('previewMobile').classList.remove('is-active')};
 $('previewMobile').onclick=()=>{$('sitePreview').classList.add('mobile-preview');$('previewMobile').classList.add('is-active');$('previewDesktop').classList.remove('is-active')};
