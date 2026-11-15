@@ -41,4 +41,5 @@ $('copyDemo').onclick=async()=>{try{await navigator.clipboard.writeText($('demoC
 document.querySelectorAll('[data-demo-status]').forEach(btn=>btn.onclick=()=>{const status=btn.dataset.demoStatus;const id=$('orderId').textContent;const list=demoRead('donations');const entry=list.find(x=>x.id===id);if(!entry)return;entry.status=status;if(!demoSave('donations',list))return;$('demoAction').textContent='Status de teste: '+(status==='sandbox_approved'?'aprovado':status==='sandbox_declined'?'recusado':'pendente')+'. Disponível no /admin → demonstração.';});
 
 render();}
-document.addEventListener('DOMContentLoaded',()=>{initLocale();if(document.body.dataset.page==='home')initHome();if(document.body.dataset.page==='checkout')initCheckout()});
+function applySettings(){const cfg=ICStore.get().settings;if(cfg.siteTitle&&cfg.siteTitle!=='Instituto Carneiro'){document.querySelectorAll('.brand').forEach(el=>{const name=el.querySelector('span:last-child');if(name)name.textContent=cfg.siteTitle;});}if(cfg.notice){const bar=document.querySelector('.topline .container span:last-child');if(bar)bar.textContent=cfg.notice;}}
+document.addEventListener('DOMContentLoaded',()=>{applySettings();initLocale();if(document.body.dataset.page==='home')initHome();if(document.body.dataset.page==='checkout')initCheckout()});
