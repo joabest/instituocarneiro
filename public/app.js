@@ -16,6 +16,8 @@ document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('cl
 const lead=$('lead-form');if(lead)lead.onsubmit=async e=>{e.preventDefault();$('lead-result').textContent='Enviando…';const b=Object.fromEntries(new FormData(lead));b.consent=$('lead-consent').checked;try{let r=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}),j=await r.json();$('lead-result').textContent=r.ok?'Contato recebido!':j.error;if(r.ok)lead.reset()}catch{$('lead-result').textContent='Falha na conexão'}};
 }
 function initCheckout(){
+const selection=new URLSearchParams(location.search);if(!causes.includes(selection.get('cause'))){location.replace('/projetos');return;}
+
 const params=new URLSearchParams(location.search),state={step:1,cause:params.get('cause')&&causes.includes(params.get('cause'))?params.get('cause'):causes[0],amount:Math.max(1,Math.min(100000,Number(params.get('amount'))||25)),frequency:params.get('frequency')==='monthly'?'monthly':'once',paymentMethod:'pix'};
 causes.forEach(c=>$('cause').append(new Option(c,c)));$('cause').value=state.cause;$('amount').value=state.amount;$('frequency').value=state.frequency;
 document.querySelectorAll('[data-amount]').forEach(b=>b.onclick=()=>{$('amount').value=b.dataset.amount;render()});

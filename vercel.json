@@ -6,6 +6,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/projetos",
+      "destination": "/projetos.html"
+    },
+    {
       "source": "/doar",
       "destination": "/doar.html"
     },
